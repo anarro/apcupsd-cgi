@@ -1,24 +1,19 @@
-# APC UPS Power Management Web Interface (from debian:latest, fcgiwrap, apcupsd-cgi)
-FROM debian:latest 
-# FROM debian:jessie
+# APC UPS Power Management
+FROM phusion/baseimage
 
 # update
 RUN apt-get -y update
  
 # install
-RUN apt-get -y install nginx-light apcupsd-cgi fcgiwrap
+RUN apt-get -y install apcupsd
 
 ADD apcupsd-hosts.conf /etc/apcupsd/hosts.conf
 ADD startup.sh /
-ADD nginx.conf /etc/nginx/nginx.conf
-
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
- && ln -sf /dev/stderr /var/log/nginx/error.log
 
 # clean
 RUN apt-get clean
 
 # Port
-EXPOSE 80
+EXPOSE 3551
 
-CMD /startup.sh; nginx -g 'daemon off;';
+CMD /startup.sh;
