@@ -1,2 +1,2 @@
-# apcupsd-cgi
-Docker - APC UPS Power Management Web Interface (from nginx:latest, fcgiwrap, apcupsd-cgi)
+# apcupsd
+Docker - APC UPS Power Management Daemon. Typical usage would be to integrate with Home Assistant or openhab
