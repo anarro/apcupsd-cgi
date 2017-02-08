@@ -1,6 +1,8 @@
 #!/bin/bash
 
-hostIp=$(/sbin/ip route|awk '/default/ { print $3 }');
+sed -i "s/UPSCABLE smart/UPSCABLE usb/g" /etc/apcupsd/apcupsd.conf
+sed -i "s/NISIP 127.0.0.1/NISIP 0.0.0.0/g" /etc/apcupsd/apcupsd.conf
+sed -i "s/UPSTYPE apcsmart/UPSTYPE usb/g" /etc/apcupsd/apcupsd.conf
+sed -i "s/DEVICE \/dev\/ttyS0/DEVICE/g" /etc/apcupsd/apcupsd.conf
 
-sed -i "s/MONITOR 127.0.0.1/MONITOR $hostIp/g" /etc/apcupsd/hosts.conf
-service fcgiwrap start;
+apcupsd -b;
